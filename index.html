@@ -2,40 +2,52 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
-  <script>
-    mocha.setup('bdd');
-  </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+    <script>
+        mocha.setup('bdd');
+    </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
-  <script>
-    describe("pow", function() {
-        it("возводит в n-ую степень", function() {
-                asser.equal(pow(2,3), 8);
-                asser.equal(pow(3,4), 81);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+    <script>
+        describe("pow", function () {
+            function makeTest(x) {
+                var expected = x * x * x;
+                it("при возведении " + x + " в степень 3 результат: " + expected, function () {
+                    chai.assert.equal(pow(x, 3), expected);
+                });
+            }
+
+            for (var x = 1; x <= 5; x++) {
+                makeTest(x);
+            }
         })
-    })
-  </script>
+    </script>
 </head>
 
 <body>
 
-  <script>
-    function pow(x, n) {
-        return 8;
-    }
-  </script>
+    <script>
+        function pow(x, n) {
+            var result = 1;
 
-  <script src="test.js"></script>
+            for (var i = 0; i < n; i++) {
+                result *= x;
+            }
 
-  <div id="mocha"></div>
+            return result;
+        }
+    </script>
 
-  <script>
-    mocha.run();
-  </script>
+    <script src="test.js"></script>
+
+    <div id="mocha"></div>
+
+    <script>
+        mocha.run();
+    </script>
 </body>
 
 </html>

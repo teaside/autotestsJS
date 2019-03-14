@@ -23,6 +23,18 @@
             for (var x = 1; x <= 5; x++) {
                 makeTest(x);
             }
+
+            it("при возведении в отрицательную степень результат Nan", function() {
+                chai.assert(isNaN(pow(2, -1)), "pow(2, -1) NaN");
+            });
+
+            it("при возведении в дробную степень результат Nan", function() {
+                chai.assert(isNaN(pow(2, 1.5)), "pow(2, 1.5) NaN");
+            });
+
+            it("ноль в нулевой степени даёт NaN", function() {
+                chai.assert(isNaN(pow(0, 0)), "0 в степени 0 не NaN");
+            });
         })
     </script>
 </head>

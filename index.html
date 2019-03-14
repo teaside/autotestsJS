@@ -20,9 +20,17 @@
                 });
             }
 
+            function checkZero() {
+                var expected = 1;
+                it("при возведении " + x + " в степень 0 результат: " + expected, function () {
+                    chai.assert.equal(pow(x, 0), expected);
+                });
+            }
+
             for (var x = 1; x <= 5; x++) {
                 makeTest(x);
             }
+
 
             it("при возведении в отрицательную степень результат Nan", function() {
                 chai.assert(isNaN(pow(2, -1)), "pow(2, -1) NaN");
@@ -35,6 +43,11 @@
             it("ноль в нулевой степени даёт NaN", function() {
                 chai.assert(isNaN(pow(0, 0)), "0 в степени 0 не NaN");
             });
+            
+            for (var x = 1; x <= 5; x++) {
+                checkZero(x);
+            }
+
         })
     </script>
 </head>
@@ -43,8 +56,17 @@
 
     <script>
         function pow(x, n) {
+        if(n<0) return NaN;
+        if(Math.round(n) != n) return NaN;
+        if(n == 0) {
+            if (x == 0) {
+                return NaN;
+            } else {
+                return 1;
+            }
+        }
             var result = 1;
-
+            
             for (var i = 0; i < n; i++) {
                 result *= x;
             }
